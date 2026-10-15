@@ -1,3 +1,46 @@
+
+async function verifyTurnstile(token, request) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+
+  if (!secret || !token) {
+    return false;
+  }
+
+  const formData = new FormData();
+  formData.append("secret", secret);
+  formData.append("response", token);
+
+  try {
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+
+const valid = await verifyTurnstile(
+  input.turnstileToken,
+  request
+);
+
+if (!valid) {
+  return respond(403, {
+    error: "Security Check Failed. Please Try Again."
+  });
+}
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    if (!response.ok) return false;
+
+    const result = await response.json();
+
+    return result.success === true &&
+      result.hostname === "woodworkwithaj.netlify.app";
+  } catch (error) {
+    console.error("Turnstile Verification Failed", error);
+    return false;
+  }
+}
 import { getStore } from '@netlify/blobs';
 const headers={'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'};
 const respond=(status,obj)=>new Response(JSON.stringify(obj),{status,headers});
