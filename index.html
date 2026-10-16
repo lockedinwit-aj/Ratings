@@ -105,4 +105,61 @@ form.addEventListener('submit',function(event){
  document.getElementById('orderStatus').textContent='Your Messaging App Should Open. Please Press Send To Finish Your Request.';
  window.location.href='sms:'+phone+separator+'body='+encodeURIComponent(message);
 });
-})();</script></body></html>
+})();</script><!-- Wood Work With AJ: Order Tracker Section -->
+<section id="order-tracker" style="background:#2b1c14;color:#f5d7a7;padding:32px 20px;border-radius:16px;max-width:700px;margin:32px auto;font-family:Arial,sans-serif">
+  <h2 style="color:#e8ba71;text-align:center">Track Your Custom Order</h2>
+  <p style="text-align:center">Enter The Tracking Code We Sent You To Check Your Sign's Progress.</p>
+  <form id="aj-track-form" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+    <input id="aj-track-code" aria-label="Order Tracking Code" placeholder="Enter Your Tracking Code" required autocomplete="off" style="padding:12px;border-radius:8px;border:1px solid #9b7b56;min-width:220px;flex:1" />
+    <button type="submit" style="background:#e8ba71;color:#2b1c14;border:0;border-radius:8px;padding:12px 18px;font-weight:bold;cursor:pointer">Check Order</button>
+  </form>
+  <div id="aj-track-result" role="status" aria-live="polite" style="margin-top:20px"></div>
+</section>
+<script>
+(() => {
+  const stages = ['Deposit Received','Design Confirmed','In Production','Painting & Finishing','Ready For Pickup / Shipping'];
+  const form = document.getElementById('aj-track-form');
+  const output = document.getElementById('aj-track-result');
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    output.textContent = 'Checking Your Order...';
+    const code = document.getElementById('aj-track-code').value.trim();
+    try {
+      const response = await fetch('/orders.json', {cache:'no-store'});
+      if (!response.ok) throw new Error('Unavailable');
+      const data = await response.json();
+      const orders = Array.isArray(data) ? data : (Array.isArray(data.orders) ? data.orders : []);
+      const order = orders.find(item => String(item.code ?? item.id ?? item.orderNumber ?? '').trim().toLowerCase() === code.toLowerCase());
+      if (!order) { output.textContent = 'Tracking Code Not Found. Please Check Your Code Or Contact Us.'; return; }
+      const stage = Number(order.stage);
+      if (!Number.isInteger(stage) || stage < 0 || stage >= stages.length) throw new Error('Invalid Stage');
+      output.replaceChildren();
+      const title = document.createElement('strong');
+      title.textContent = 'Current Status: ' + stages[stage];
+      output.appendChild(title);
+      const list = document.createElement('ol');
+      stages.forEach((label, index) => {
+        const li = document.createElement('li');
+        li.textContent = (index <= stage ? '✓ ' : '○ ') + label;
+        li.style.padding = '5px 0';
+        li.style.opacity = index <= stage ? '1' : '.65';
+        list.appendChild(li);
+      });
+      output.appendChild(list);
+      if (order.updated) {
+        const date = document.createElement('small');
+        date.textContent = 'Last Updated: ' + String(order.updated);
+        output.appendChild(date);
+      }
+    } catch (error) {
+      output.textContent = 'Order Tracking Is Temporarily Unavailable. Please Try Again Later.';
+    }
+  });
+})();
+</script>
+
+  
+  
+</body>
+</html>
+
