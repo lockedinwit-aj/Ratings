@@ -37,12 +37,10 @@
 .faq-section details p{padding:13px 16px;margin:0;line-height:1.55;font-size:14px}
 .faq-section summary:focus-visible{outline:2px solid #ffe2b2;outline-offset:-3px}
 </style><style>
-/* Desktop: main site in center, ready-to-sell panels on both sides. */
-body.aj-with-side-signs{display:grid;grid-template-columns:minmax(0,1fr);align-items:start;gap:18px}
+/* Desktop: Ready-To-Sell on right; responsive stacking on mobile. */
+body.aj-with-side-signs{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "right";gap:18px;align-items:start}
 body.aj-with-side-signs > main.wrap{grid-area:main;width:100%;min-width:0}
-#aj-ready-sell{grid-area:left}
-#aj-ready-sell-right{grid-area:right}
-body.aj-with-side-signs{grid-template-areas:"main" "left" "right"}
+#aj-ready-sell{grid-area:right}
 .aj-rs-panel{min-width:0;margin:18px auto 0;padding:20px 14px;background:#342217;border:1px solid #a47b4c;border-radius:19px;color:#fff5e7;font-family:system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;width:100%;max-width:540px}
 .aj-rs-panel h2{font-family:Georgia,serif;color:#ffe2b2;font-size:23px;margin:0 0 10px}
 .aj-rs-panel .aj-rs-lead{font-size:13px;color:#e8d0b4;margin-bottom:18px}
@@ -57,12 +55,15 @@ body.aj-with-side-signs{grid-template-areas:"main" "left" "right"}
 .aj-rs-panel .aj-rs-button{display:block;text-align:center;background:#e8ba71;color:#24180f;border-radius:10px;padding:12px;text-decoration:none;font-weight:750;margin-top:auto}
 .aj-rs-panel .aj-rs-button:hover,.aj-rs-panel .aj-rs-button:focus-visible{background:#f7d49e}
 .aj-rs-panel .aj-rs-empty{border:1px dashed #9b754d;border-radius:13px;padding:25px 12px;color:#e8d0b4;font-size:14px;line-height:1.6}
-@media(min-width:1160px){
- body.aj-with-side-signs{grid-template-columns:minmax(215px,1fr) minmax(0,540px) minmax(215px,1fr);grid-template-areas:"left main right";gap:20px;padding:20px 20px}
+@media(min-width:1000px){
+ body.aj-with-side-signs{grid-template-columns:minmax(0,540px) minmax(245px,340px);grid-template-areas:"main right";justify-content:center;gap:26px;padding:20px 20px}
  .aj-rs-panel{margin:12px 0 0;max-width:none;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto}
  .aj-rs-grid{grid-template-columns:1fr}
 }
-@media(max-width:1159px){#aj-ready-sell-right:has(.aj-rs-grid:empty){display:none}}
+@media(max-width:999px){
+ body.aj-with-side-signs{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "right"}
+ .aj-rs-panel{margin:12px auto 0}
+}
 </style></head><body class="aj-with-side-signs"><aside id="aj-ready-sell" class="aj-rs-panel" aria-labelledby="aj-ready-sell-title">
 <h2 id="aj-ready-sell-title">Ready-To-Sell Signs</h2>
 <p class="aj-rs-lead">Finished Welcome Signs Available Now</p>
@@ -95,11 +96,7 @@ Only Remove These Comment Markers When You Have Uploaded A Real Photo And Have T
 <div class="customer-empty" id="customerPhotoEmpty">Customer Photos Coming Soon! Be One Of The First To Share Your Finished Welcome Sign.</div>
 <a class="customer-photo-link" href="sms:+19132918663?body=Hi%20Wood%20Work%20With%20AJ!%20I%27d%20Like%20To%20Share%20A%20Photo%20Of%20My%20Welcome%20Sign%20For%20Your%20Happy%20Customers%20Gallery.%20I%27ll%20Attach%20My%20Photo%20Here.">📸 Text Us Your Sign Photo</a>
 <p class="customer-note">Text Your Photo To (913) 291-8663. Photos Are Reviewed And Added By Wood Work With AJ Before They Appear Here. Please Only Send Photos You Own Or Have Permission To Share. Texting May Work Best On A Phone; Attach Your Photo In Your Messaging App And Press Send.</p>
-</section><section class="reviews" id="customerReviews"><h2>Customer Reviews</h2><p class="review-lead">Share Your Experience With Wood Work With AJ</p><form id="reviewForm" class="review-form"><label>Rate Your Experience</label><div class="review-stars" id="reviewStars" role="group" aria-label="Star Rating"><button type="button" data-rating="1" aria-label="1 Star">★</button><button type="button" data-rating="2" aria-label="2 Stars">★</button><button type="button" data-rating="3" aria-label="3 Stars">★</button><button type="button" data-rating="4" aria-label="4 Stars">★</button><button type="button" data-rating="5" aria-label="5 Stars">★</button></div><label for="reviewName">Your Name</label><input id="reviewName" maxlength="60" required autocomplete="name" placeholder="Your Name"><label for="reviewText">Your Review</label><textarea id="reviewText" maxlength="1000" minlength="5" required placeholder="Tell Us About Your Experience"></textarea><label class="review-hp" for="reviewWebsite">Website (Leave Blank)</label><input class="review-hp" id="reviewWebsite" tabindex="-1" autocomplete="off"><button class="review-submit" id="reviewSubmit" type="submit">Submit Review</button><div class="review-status" id="reviewStatus" role="status" aria-live="polite"></div></form><div class="review-list" id="reviewList"><p class="review-count">Loading Reviews…</p></div></section><section class="faq-section" id="frequentlyAskedQuestions"><h2>Frequently Asked Questions</h2><p class="faq-intro">Everything You Need To Know Before Ordering</p><details open><summary>How Do I Place A Custom Order?</summary><p>Fill Out Our Custom Order Form On The Website. Your Messaging App Will Open With Your Request Ready To Send To (913) 291-8663.</p></details><details><summary>Can I Request A Specific Team Or Organization?</summary><p>Yes! We Create Custom Welcome Signs For Sports Teams, Fraternities, Sororities, And Other Personalized Designs.</p></details><details><summary>Can I Send A Reference Picture?</summary><p>Yes! You Can Attach An Inspiration Photo When Texting Us Your Custom Order Request.</p></details><details><summary>How Much Do Custom Signs Cost?</summary><p>Pricing Depends On The Design And Customization. Text Us Your Idea To Request A Quote.</p></details><details><summary>How Long Does An Order Take?</summary><p>Turnaround Time Depends On The Design And Current Order Volume. We&#x27;ll Provide An Estimate When Discussing Your Order. (Typically 3-4 Weeks After Sending Deposit)</p></details><details><summary>Do You Offer Pickup Or Shipping?</summary><p>Yes! We Offer Both Pickup And Shipping For Our Custom Welcome Signs. Customers Are Responsible For Covering All Shipping Costs.</p></details></section><p class="foot">Handcrafted Signs • Made With Care</p></main><aside id="aj-ready-sell-right" class="aj-rs-panel" aria-labelledby="aj-ready-sell-right-title">
-<h2 id="aj-ready-sell-right-title">More Ready-To-Sell Signs</h2>
-<p class="aj-rs-lead">Browse Available Finished Designs</p>
-<div id="aj-rs-grid-right" class="aj-rs-grid" aria-live="polite"></div>
-</aside><script>if(document.querySelector("#customerPhotoGrid .customer-photo-card")){document.getElementById("customerPhotoEmpty").hidden=true;}</script><script>document.getElementById('zelle').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('9132918663');document.getElementById('copyStatus').textContent='Copied!'}catch(e){document.getElementById('copyStatus').textContent='9132918663'}})</script><script>(function(){
+</section><section class="reviews" id="customerReviews"><h2>Customer Reviews</h2><p class="review-lead">Share Your Experience With Wood Work With AJ</p><form id="reviewForm" class="review-form"><label>Rate Your Experience</label><div class="review-stars" id="reviewStars" role="group" aria-label="Star Rating"><button type="button" data-rating="1" aria-label="1 Star">★</button><button type="button" data-rating="2" aria-label="2 Stars">★</button><button type="button" data-rating="3" aria-label="3 Stars">★</button><button type="button" data-rating="4" aria-label="4 Stars">★</button><button type="button" data-rating="5" aria-label="5 Stars">★</button></div><label for="reviewName">Your Name</label><input id="reviewName" maxlength="60" required autocomplete="name" placeholder="Your Name"><label for="reviewText">Your Review</label><textarea id="reviewText" maxlength="1000" minlength="5" required placeholder="Tell Us About Your Experience"></textarea><label class="review-hp" for="reviewWebsite">Website (Leave Blank)</label><input class="review-hp" id="reviewWebsite" tabindex="-1" autocomplete="off"><button class="review-submit" id="reviewSubmit" type="submit">Submit Review</button><div class="review-status" id="reviewStatus" role="status" aria-live="polite"></div></form><div class="review-list" id="reviewList"><p class="review-count">Loading Reviews…</p></div></section><section class="faq-section" id="frequentlyAskedQuestions"><h2>Frequently Asked Questions</h2><p class="faq-intro">Everything You Need To Know Before Ordering</p><details open><summary>How Do I Place A Custom Order?</summary><p>Fill Out Our Custom Order Form On The Website. Your Messaging App Will Open With Your Request Ready To Send To (913) 291-8663.</p></details><details><summary>Can I Request A Specific Team Or Organization?</summary><p>Yes! We Create Custom Welcome Signs For Sports Teams, Fraternities, Sororities, And Other Personalized Designs.</p></details><details><summary>Can I Send A Reference Picture?</summary><p>Yes! You Can Attach An Inspiration Photo When Texting Us Your Custom Order Request.</p></details><details><summary>How Much Do Custom Signs Cost?</summary><p>Pricing Depends On The Design And Customization. Text Us Your Idea To Request A Quote.</p></details><details><summary>How Long Does An Order Take?</summary><p>Turnaround Time Depends On The Design And Current Order Volume. We&#x27;ll Provide An Estimate When Discussing Your Order. (Typically 3-4 Weeks After Sending Deposit)</p></details><details><summary>Do You Offer Pickup Or Shipping?</summary><p>Yes! We Offer Both Pickup And Shipping For Our Custom Welcome Signs. Customers Are Responsible For Covering All Shipping Costs.</p></details></section><p class="foot">Handcrafted Signs • Made With Care</p></main><script>if(document.querySelector("#customerPhotoGrid .customer-photo-card")){document.getElementById("customerPhotoEmpty").hidden=true;}</script><script>document.getElementById('zelle').addEventListener('click',async()=>{try{await navigator.clipboard.writeText('9132918663');document.getElementById('copyStatus').textContent='Copied!'}catch(e){document.getElementById('copyStatus').textContent='9132918663'}})</script><script>(function(){
   const tiles=Array.from(document.querySelectorAll('.product-tile'));
   const dlg=document.getElementById('galleryDialog');
   const large=document.getElementById('galleryLarge');
@@ -224,14 +221,12 @@ form.addEventListener('submit',function(event){
 (function(){
   'use strict';
   const grid=document.getElementById('aj-rs-grid');
-  const rightGrid=document.getElementById('aj-rs-grid-right');
   const phone='9132918663';
   function empty(message){
     const div=document.createElement('div');
     div.className='aj-rs-empty';
     div.textContent=message;
     grid.replaceChildren(div);
-    rightGrid.replaceChildren();
   }
   function safeImagePath(path){
     if(typeof path!=='string'||!path.trim())return null;
@@ -248,10 +243,9 @@ form.addEventListener('submit',function(event){
   }
   function show(signs){
     grid.replaceChildren();
-    rightGrid.replaceChildren();
     const visible=signs.filter(s=>s&&typeof s==='object'&&s.available!==false&&s.status!=='sold');
     if(!visible.length){empty('No Ready-To-Sell Signs Available Right Now. Check Back Soon, Or Request A Custom Welcome Sign!');return;}
-    visible.forEach((sign,index)=>{
+    visible.forEach((sign)=>{
       const name=String(sign.name||'Welcome Sign');
       const card=document.createElement('article');card.className='aj-rs-card';
       const image=safeImagePath(sign.image);
@@ -268,7 +262,7 @@ form.addEventListener('submit',function(event){
       const message='Hello! I Am Interested In Purchasing The Ready-To-Sell Sign: '+name+'. Is It Still Available?';
       const a=document.createElement('a');a.className='aj-rs-button';a.href='sms:'+phone+'?body='+encodeURIComponent(message);a.textContent='Text To Purchase';
       a.setAttribute('aria-label','Text To Purchase '+name);info.appendChild(a);
-      card.appendChild(info);(index%2===0?grid:rightGrid).appendChild(card);
+      card.appendChild(info);grid.appendChild(card);
     });
   }
   fetch('/ready-to-sell.json',{cache:'no-store'})
