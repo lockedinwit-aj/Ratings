@@ -55,12 +55,22 @@ body.aj-with-side-signs > main.wrap{grid-area:main;width:100%;min-width:0}
 .aj-rs-panel .aj-rs-button{display:block;text-align:center;background:#e8ba71;color:#24180f;border-radius:10px;padding:12px;text-decoration:none;font-weight:750;margin-top:auto}
 .aj-rs-panel .aj-rs-button:hover,.aj-rs-panel .aj-rs-button:focus-visible{background:#f7d49e}
 .aj-rs-panel .aj-rs-empty{border:1px dashed #9b754d;border-radius:13px;padding:25px 12px;color:#e8d0b4;font-size:14px;line-height:1.6}
-@media(min-width:1000px){
- body.aj-with-side-signs{grid-template-columns:minmax(0,540px) minmax(245px,340px);grid-template-areas:"main right";justify-content:center;gap:26px;padding:20px 20px}
- .aj-rs-panel{margin:12px 0 0;max-width:none;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto}
+/* Keep the website's main column centered in the full viewport. The side panel
+   occupies the right-hand space without shifting the center column. */
+@media(min-width:1200px){
+ body.aj-with-side-signs{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,540px) minmax(0,1fr);
+  grid-template-areas:". main right";
+  column-gap:0;
+  padding:20px 20px;
+  align-items:start;
+ }
+ body.aj-with-side-signs > main.wrap{width:100%;max-width:540px;margin:0 auto}
+ #aj-ready-sell{justify-self:start;width:calc(100% - 24px);max-width:340px;margin:12px 0 0 24px;position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto}
  .aj-rs-grid{grid-template-columns:1fr}
 }
-@media(max-width:999px){
+@media(max-width:1199px){
  body.aj-with-side-signs{grid-template-columns:minmax(0,1fr);grid-template-areas:"main" "right"}
  .aj-rs-panel{margin:12px auto 0}
 }
