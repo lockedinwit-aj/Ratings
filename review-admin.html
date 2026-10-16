@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private Review Management | Wood Work With AJ</title>
+<style>
+:root{color-scheme:dark}body{font-family:system-ui,Arial,sans-serif;background:#23160f;color:#f6e5ca;max-width:760px;margin:40px auto;padding:0 20px}h1{color:#e7b665}input,button{font:inherit;padding:12px;border-radius:8px}input{background:#37261b;color:white;border:1px solid #9d794e;max-width:100%;box-sizing:border-box}button{background:#d6a45a;color:#1b110a;border:0;cursor:pointer}button.delete{background:#9c3838;color:white}.review{border:1px solid #8b6a44;border-radius:10px;padding:16px;margin:14px 0;overflow-wrap:anywhere}.review p{white-space:pre-wrap}small{color:#c7b49b}#status{min-height:24px}a{color:#e7b665}
+</style></head><body>
+<h1>Private Review Management</h1>
+<p>Enter Your Admin Password To View And Delete Reviews. This Page Does Not Store Your Password.</p>
+<label for="password">Admin Password</label><p><input id="password" type="password" autocomplete="off" placeholder="Admin Password"> <button id="load">View Reviews</button></p>
+<p id="status" role="status"></p><div id="reviews"></div>
+<p><a href="/">Back To Website</a></p>
+<script>
+const endpoint='/.netlify/functions/reviews';
+const password=document.getElementById('password');
+const status=document.getElementById('status');
+const list=document.getElementById('reviews');
+async function load(){
+  status.textContent='Loading Reviews…';list.replaceChildren();
+  try{
+    const res=await fetch(endpoint+'?admin=1',{headers:{'x-admin-password':password.value},cache:'no-store'});
+    const data=await res.json();if(!res.ok)throw new Error(data.error||'Could Not Load Reviews.');
+    status.textContent=`${data.reviews.length} Review(s) Found.`;
+    for(const r of data.reviews){
+      const card=document.createElement('article');card.className='review';
+      const heading=document.createElement('strong');heading.textContent=`${r.name} — ${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}`;
+      const message=document.createElement('p');message.textContent=r.message;
+      const date=document.createElement('small');date.textContent=r.createdAt||'';
+      const button=document.createElement('button');button.className='delete';button.textContent='Delete Review';
+      button.addEventListener('click',async()=>{
+        if(!confirm(`Permanently Delete The Review By ${r.name}?`))return;
+        button.disabled=true;
+        try{
+          const response=await fetch(endpoint,{method:'DELETE',headers:{'Content-Type':'application/json','x-admin-password':password.value},body:JSON.stringify({key:r.key})});
+          const result=await response.json();if(!response.ok)throw new Error(result.error||'Delete Failed.');
+          card.remove();status.textContent='Review Deleted Successfully.';
+        }catch(e){status.textContent=e.message;button.disabled=false;}
+      });
+      card.append(heading,message,date,document.createElement('br'),button);list.append(card);
+    }
+  }catch(e){status.textContent=e.message;}
+}
+document.getElementById('load').addEventListener('click',load);
+password.addEventListener('keydown',e=>{if(e.key==='Enter')load()});
+</script></body></html>
