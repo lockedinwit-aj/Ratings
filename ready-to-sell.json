@@ -1,4 +1,20 @@
 {
-  "signs": []
+  "signs": [
+    {
+      "id": "chiefs-red-gold-glitter",
+      "name": "Red Chiefs Welcome Sign - Gold Glitter",
+      "price": 95,
+      "description": "Red wooden Chiefs welcome sign with gold glitter lettering.",
+      "image": "ready-signs/red-chiefs-glitter.jpg",
+      "available": true
+    },
+    {
+      "id": "chiefs-burnt-wood-red-glitter",
+      "name": "Burnt-Wood Chiefs Welcome Sign - Red Glitter",
+      "price": 85,
+      "description": "Burnt-wood Chiefs welcome sign with red glitter lettering.",
+      "image": "ready-signs/burnt-wood-chiefs-glitter.jpg",
+      "available": true
+    }
+  ]
 }
-|
