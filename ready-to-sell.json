@@ -15,6 +15,15 @@
       "description": "Burnt-wood Chiefs welcome sign with red glitter lettering.",
       "image": "ready-signs/burnt-wood-chiefs-glitter.jpg",
       "available": true
+    },
+    {
+      "id": "kansas-jayhawks-welcome-sign",
+      "name": "Kansas Jayhawks Welcome Sign",
+      "price": 85,
+      "description": "Handcrafted Kansas Jayhawks welcome sign. Three available.",
+      "image": "ready-signs/kansas-jayhawks-welcome-sign.jpg",
+      "available": true,
+      "quantity": 3
     }
   ]
 }
